@@ -1,0 +1,82 @@
+<!doctype>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="demo.css">
+  </head>
+  <body>
+    <article>
+      <h1>CtrlAltDel</h1>
+      <p>
+        A simple utility to add/manipulate/delete objects in a frame.
+        Requires jQuery.
+      </p>
+
+      <h2>Demo</h2>
+      <p>
+        Add an element, move it around, remove it.
+      </p>
+      <div id="demo-screen" style="position:relative;"></div>
+      <div class="demo-controls">
+        <input type="button" value="Set/Move Box 1" id="box1move">
+        <input type="button" value="Remove Box 1" id="box1remove">
+      </div>
+
+      <h2>Usage</h2>
+      <p>
+        Create a DIV and initialize a CtrlAltDel object.
+        <i>Make sure the DIV is is not position:static.</i>
+      </p>
+<pre><code>
+&lt;div id="screen">&lt;/div>
+&lt;script>
+  var $target = $('#screen'),
+      screen = new SEQ.CtrlAltDel( $target );
+&lt;/script>
+</code></pre>
+      <p>
+        Issue a command to add/modify an object. Make sure the "id"
+        is unique&mdash;this is what will be used to see if an element
+        is created or just updated.
+      </p>
+      <p>
+        If the "bubble" does not exist then a DIV will be added to
+        $target <i>id</i>ed "bubble" with inner HTML <i>html</i>,
+        CSS classes <i>classes</i>, and <i>css</i>.
+      </p>
+<pre><code>
+&lt;script>
+  var $element_updated = screen.set('bubble', {
+    classes: 'soapy floaty',
+    html: 'Some &lt;b>html</b>',
+    css: {
+      top: 10,
+      left: 10,
+      backgroundColor: 'red'
+    }
+  });
+&lt;/script>
+</code></pre>
+      <p>
+        Updating this ID means just setting the CSS. The HTML will
+        only be updated if it is different than it was last time.
+      </p>
+      <p>
+        Getting rid of the element is super easy. Just use <i>remove</i>:
+      </p>
+<pre><code>
+&lt;script>
+  screen.remove({
+    id: 'bubble'
+  });
+&lt;/script>
+</code></pre>
+      <p>
+        Have fun!
+      </p>
+    </article>
+    <script src="lib/jquery-2.0.3.min.js"></script>
+    <script src="lib/seq_ctrlaltdel.js"></script>
+    <script src="demo.js"></script>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CtrlAltDel Tests</title>
+  <link rel="stylesheet" href="../lib/qunit-1.12.0.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <div id="test-screen"></div>
+  <style>
+    #test-screen {
+      position: relative;
+      height: 200px;
+      border: 3px solid #555;
+    }
+    .item1 {
+      position: absolute;
+    }
+    .item2 {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+    }
+  </style>
+  
+  <script src="../lib/jquery-2.0.3.min.js"></script>
+  <script src="../lib/qunit-1.12.0.js"></script>
+  <script src="../lib/seq_ctrlaltdel.js"></script>
+  <script>
+    $(function(){
+      var test_screen = new SEQ.CtrlAltDel($('#test-screen'));
+      
+      test('Should return the test-screen DIV', function () {
+        equal(test_screen.target()[0].id, 'test-screen');
+      });
+
+      test('Should not have .item1', function () {
+        equal($('#i1').length, 0);
+      });
+
+      test('Should have .item1 after set', function () {
+        test_screen.set('i1', {
+          classes: 'item1',
+          html: 'I am Item #1.', 
+          css: {top: 100, left: 200}
+        });
+        equal($('.item1').length, 1);
+        equal($('#i1').text(), 'I am Item #1.');
+        equal($('#i1').position().top, 100);
+        equal($('#i1').position().left, 200)
+      });
+
+      test('Should move the item', function () {
+        test_screen.set('i1', {
+          css: {top: 60}
+        });
+        equal($('#i1').position().top, 60);
+      });
+
+      test('Should remove .item1', function () {
+        test_screen.remove('i1');
+        equal($('.item1').length, 0);
+      });
+
+      test('Should add .item2', function () {
+        test_screen.set('i2', {html: 'item two...', classes:'item2' });
+        equal($('.item2').length, 1);
+        equal($('#i2').position().top, 50);
+        equal($('#i2').position().left, 50);
+        
+        test_screen.set('i2', {html: 'OK!'});
+        equal($('#i2').text(), 'OK!');
+      });
+    });
+  </script>
+</body>
+</html>

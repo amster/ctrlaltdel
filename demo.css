@@ -1,0 +1,23 @@
+#demo-screen {
+  border: 3px solid #555;
+  position: relative;
+  height: 200px;
+}
+
+.demo-controls {
+  text-align: center;
+  padding: 20px 0;
+}
+.demo-controls input {
+  font-size: 1.3em;
+  padding: 10px;
+}
+
+.boxy-demo {
+  background: red;
+  border: 1px solid black;
+  padding: 10px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
